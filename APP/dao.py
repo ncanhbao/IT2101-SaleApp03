@@ -1,4 +1,4 @@
-def get_categories():
+def get_categories(kw):
     return [
         {
             "id": 1,
@@ -9,8 +9,9 @@ def get_categories():
             "name": "Tablet"
         }]
 
-def get_product():
-    return [
+
+def get_product(kw):
+    products = [
         {
             "id": 1,
             "name": "Iphone 15",
@@ -54,3 +55,9 @@ def get_product():
             "categories_id": 1
         }
     ]
+    if kw:
+        products = [p for p in products if p['name'].find(kw) >= 0]
+    return products
+
+
+

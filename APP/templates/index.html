@@ -20,8 +20,8 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Trang chủ</a>
                 </li>
@@ -31,10 +31,14 @@
                 </li>
                 {% endfor %}
             </ul>
+            <form class="d-flex" method="get" action="/">
+                <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa tìm kiếm...">
+                <button class="btn btn-primary" type="submit">Tìm</button>
+            </form>
         </div>
     </div>
 </nav>
-<section >
+<section>
     <div class="row">
         {% for p in product %}
         <div class="col-xs_6 col-md-3" style="padding: 5px;">
@@ -51,5 +55,11 @@
         {% endfor %}
     </div>
 </section>
+<footer>
+    <div class="mt-4 p-5 bg-primary text-white rounded">
+        <h1>Nguyễn Cảnh Bảo</h1>
+        <p>&copy; 2023</p>
+    </div>
+</footer>
 </body>
 </html>
