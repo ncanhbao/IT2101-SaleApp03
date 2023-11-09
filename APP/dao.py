@@ -1,63 +1,14 @@
-def get_categories(kw):
-    return [
-        {
-            "id": 1,
-            "name": "Mobile"
-        },
-        {
-            "id": 2,
-            "name": "Tablet"
-        }]
+from APP.models import Category, Product
+
+
+def get_categories():
+    return Category.query.all()
 
 
 def get_product(kw):
-    products = [
-        {
-            "id": 1,
-            "name": "Iphone 15",
-            "price": 23000000,
-            "image": "https://cdn2.cellphones.com.vn/x/media/catalog/product/v/n/vn_iphone_15_black_pdp_image_position-1a_black_color_1_4.jpg",
-            "categories_id": 1
-        },
-        {
-            "id": 2,
-            "name": "Iphone 14",
-            "price": 18800000,
-            "image": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/h/photo_2022-09-28_21-58-48.jpg",
-            "categories_id": 1
-        },
-        {
-            "id": 3,
-            "name": "Samsung Galaxy Z Flip5",
-            "price": 22000000,
-            "image": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-z-flip5-tim-4_2.jpg",
-            "categories_id": 1
-        },
-        {
-            "id": 1,
-            "name": "Iphone 15",
-            "price": 23000000,
-            "image": "https://cdn2.cellphones.com.vn/x/media/catalog/product/v/n/vn_iphone_15_black_pdp_image_position-1a_black_color_1_4.jpg",
-            "categories_id": 1
-        },
-        {
-            "id": 2,
-            "name": "Iphone 14",
-            "price": 18800000,
-            "image": "https://cdn2.cellphones.com.vn/x/media/catalog/product/p/h/photo_2022-09-28_21-58-48.jpg",
-            "categories_id": 1
-        },
-        {
-            "id": 3,
-            "name": "Samsung Galaxy Z Flip5",
-            "price": 22000000,
-            "image": "https://cdn2.cellphones.com.vn/x/media/catalog/product/s/a/samsung-galaxy-z-flip5-tim-4_2.jpg",
-            "categories_id": 1
-        }
-    ]
+    products = Product.query
+
     if kw:
-        products = [p for p in products if p['name'].find(kw) >= 0]
-    return products
+        products = products.filter(Product.name.contains(kw))
 
-
-
+    return products.all()

@@ -6,7 +6,7 @@ from APP import app
 @app.route("/")
 def index():
     kw = request.args.get('kw')
-    cates = dao.get_categories(kw)
+    cates = dao.get_categories()
     prod = dao.get_product(kw)
     return render_template('index.html', categories=cates, product=prod)
 
