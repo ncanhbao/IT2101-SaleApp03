@@ -1,15 +1,25 @@
 from APP import db, app
 from sqlalchemy import Column, Integer, String, Boolean, Float, ForeignKey
 from sqlalchemy.orm import relationship
+from flask_login import UserMixin
 
+class User(db.Model, UserMixin):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(50), nullable=True)
+    username = Column(String(50), nullable=True, unique=True)
+    password = Column(String(50), nullable=True, unique=True)
+    avatar = Column(String(100))
+    def __str__(self):
+        return self.name
 
 class Category(db.Model):
     __tablename__ = 'category'
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=True)
+    products = relationship('Product', backref='category', lazy=True)
 
-
-products = relationship('Product', backref='category', lazy=True)
+    def __str__(self):
+        return self.name
 
 
 class Product(db.Model):
@@ -20,10 +30,17 @@ class Product(db.Model):
     active = Column(Boolean, default=True)
     category_id = Column(Integer, ForeignKey(Category.id), nullable=False)
 
+    def __str__(self):
+        return self.name
 
-# if __name__ == '__main__':
-    # with app.app_context():
-        # p1 = Product(name="Xiaomi Redmi Note 12", price=5000000, category_id=1)
-        # db.session.add(p1)
-        # db.session.commit()
-        # db.create_all()
+
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        #import hashlib
+        #u = User(name='Admin', username='admin', password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()))
+        #db.session.add(u)
+        #db.session.commit()
+
+
+
